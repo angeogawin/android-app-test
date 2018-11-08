@@ -1,0 +1,17 @@
+.title{
+	color:red;
+}
+.sousTitre{
+	color:blue;
+	text-transform: uppercase;
+	transition: all 0.5s
+	
+}
+.sousTitre span {
+	color:green
+}
+
+.active{
+	font-size:30px;
+	transition: all 0.5s
+}

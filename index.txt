@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+
+  <title>Exo1</title>
+  <meta name="description" content="The HTML5 Herald">
+ 
+  <script src="js/framework7.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/framework7.min.css">
+  <link rel="stylesheet" type="text/css" href="css/exo1.css">
+
+</head>
+
+<body>
+	<div class="title">Hello world</div>
+	<div class="sousTitre">Bienvenue <span id="setme" >sur le site</span></div>
+	<div class="sousTitre" id="toggleme">Bienvenue <span >sur le site</span></div>
+	<button id="changehtml">Change HTML</button>
+	<button id="toggle">Toggle</button>
+	<button id="stop">Stop</button>
+	
+	<script>
+	var timer=null
+		$("button#changehtml").on("click",function(){
+			$("span#setme").html("JS")
+			
+		})
+		$("button#toggle").on("click",function(){
+			$(".sousTitre#toggleme").toggle()
+			
+		})
+		$(".sousTitre").on("click",function(){
+			$(this).toggleClass("active")
+			
+		})
+		timer=setInterval(function(){
+			$(".sousTitre").toggleClass("active")
+			
+		},1000)
+		$("button#stop").on("click",function(){
+			clearInterval(timer)
+			
+		})
+	</script>
+ 
+</body>
+</html>

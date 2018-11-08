@@ -1,0 +1,101 @@
+<template>
+  <div class="page">
+    <div class="navbar">
+      <div class="navbar-inner sliding">
+        <div class="left">
+          <a href="#" class="link back">
+            <i class="icon icon-back"></i>
+            <span class="ios-only">Back</span>
+          </a>
+        </div>
+        <div class="title">{{title}}</div>
+      </div>
+    </div>
+    <div class="page-content">
+      <form>
+
+        <div class="list">
+          <ul>
+
+            <li class="item-content item-input">
+
+              <div class="item-inner">
+                <div class="item-title item-label">Food</div>
+                <div class="item-input-wrap">
+                  <input type="text" name="name" id="name">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <button class="button" @click="checkAPI">Check</button>
+      </form>
+      <div class="list no-hairlines" >
+        <ul >
+          {{element}}
+        </ul>
+        <ul id="image">
+         <img src={{image}} >
+       </ul>
+     </div>
+
+
+   </div>
+ </div>
+
+</template>
+<script>
+
+  // script must return component object
+  return {
+    data: function () {
+      return {
+        title: "",
+        image:"",
+        element:"",
+        
+      }
+    },
+    methods: {
+      checkAPI: function (e) {
+        e.preventDefault();
+        
+        console.log($$('#name').val())
+        var self=this
+        var recherche=$$('#name').val()
+        var url="https://fr.openfoodfacts.org/api/v0/produit/3029330003533.json"
+        app.request.get(url,{},function(json){
+
+          json=JSON.parse(json)
+          self.$setState({
+
+            title: json.product.product_name_fr,
+            image: json.product.image_ingredients_small_url,
+            element: json.product[recherche],
+          })
+        })
+        
+        
+      }
+      
+
+    },
+    
+    on: {
+
+      pageInit: function () {
+        // do something on page init
+      },
+      pageAfterOut: function () {
+        // page has left the view
+      },
+    }
+  }
+</script>
+
+https://fr.openfoodfacts.org/api/v0/produit/3029330003533.json
